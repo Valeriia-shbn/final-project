@@ -15,7 +15,8 @@ import java.sql.*;
 
 public class DataBaseHelper {
 
-    private static final String URL = "jdbc:mysql://localhost:3306/app";
+//    private static final String URL = "jdbc:mysql://localhost:3306/app";
+    private static final String URL = "jdbc:postgresql://localhost:5432/app";
     private static final String USER = "app";
     private static final String PASSWORD = "pass";
     private static final QueryRunner runner = new QueryRunner();
@@ -70,7 +71,7 @@ public class DataBaseHelper {
     }
 
     @SneakyThrows
-    public static int getOrderCountByCreditId(String creditId) {
+    public static int getOrderCountByCreditId(String bankId) {
         String sql = "SELECT COUNT(*) FROM order_entity WHERE credit_id = ?";
         try (var connection = getConnection()) {
             return runner.query(connection, sql, rs -> {
@@ -78,7 +79,7 @@ public class DataBaseHelper {
                     return rs.getInt(1);
                 }
                 return 0;
-            }, creditId);
+            }, bankId);
         }
     }
 

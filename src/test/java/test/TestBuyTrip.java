@@ -140,7 +140,7 @@ public class TestBuyTrip {
         transactionRecordCredit = DataBaseHelper.getLastTransactionCredit();
         assertEquals(APPROVED, transactionRecordCredit.getStatus());
 
-        int actualNumberOfOrders = DataBaseHelper.getOrderCountByBankId(transactionRecordCredit.getBankId());
+        int actualNumberOfOrders = DataBaseHelper.getOrderCountByCreditId(transactionRecordCredit.getBankId());
         assertEquals(1, actualNumberOfOrders);
 
     }

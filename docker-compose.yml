@@ -14,17 +14,17 @@ services:
     volumes:
       - mysql_data:/var/lib/mysql
 
-#  postgres:
-#    image: postgres:latest
-#    container_name: postgres_container
-#    environment:
-#      POSTGRES_DB: my_database
-#      POSTGRES_USER: user
-#      POSTGRES_PASSWORD: user_password
-#    ports:
-#      - "5432:5432"
-#    volumes:
-#      - postgres_data:/var/lib/postgresql/data
+  postgres:
+    image: postgres:latest
+    container_name: postgres_container
+    environment:
+      POSTGRES_DB: app
+      POSTGRES_USER: app
+      POSTGRES_PASSWORD: pass
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
 
   gate-simulator:
     build:
