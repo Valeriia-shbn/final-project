@@ -2,8 +2,6 @@ package data;
 
 import lombok.Data;
 
-import java.time.LocalDateTime;
-
 @Data
 public class TransactionRecordPayment {
     String id;

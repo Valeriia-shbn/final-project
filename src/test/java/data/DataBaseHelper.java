@@ -1,21 +1,16 @@
 package data;
 
-import com.github.javafaker.Faker;
 import lombok.SneakyThrows;
 import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.handlers.BeanHandler;
 
 import java.sql.Connection;
-
-import org.apache.commons.dbutils.handlers.BeanHandler;
-import org.apache.commons.dbutils.handlers.ScalarHandler;
-import org.mindrot.jbcrypt.BCrypt;
-
-import java.sql.*;
+import java.sql.DriverManager;
 
 
 public class DataBaseHelper {
 
-//    private static final String URL = "jdbc:mysql://localhost:3306/app";
+    //    private static final String URL = "jdbc:mysql://localhost:3306/app";
     private static final String URL = "jdbc:postgresql://localhost:5432/app";
     private static final String USER = "app";
     private static final String PASSWORD = "pass";

@@ -1,7 +1,6 @@
 package data;
 
 import lombok.Data;
-import lombok.Value;
 
 import java.time.LocalDateTime;
 

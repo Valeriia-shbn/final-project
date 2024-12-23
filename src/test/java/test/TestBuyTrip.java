@@ -1,15 +1,10 @@
 package test;
 
 import data.*;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-import org.openqa.selenium.chrome.ChromeOptions;
-
-import com.codeborne.selenide.Configuration;
 import page.CardWidget;
 import page.MainPage;
 
@@ -29,7 +24,6 @@ public class TestBuyTrip {
     private final String DECLINED = "DECLINED";
     private TransactionRecordCredit transactionRecordCredit;
     private TransactionRecordPayment transactionRecordPayment;
-    private OrderEntity orderEntity;
 
 
     @BeforeEach

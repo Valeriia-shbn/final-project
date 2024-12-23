@@ -4,16 +4,12 @@ import com.codeborne.selenide.SelenideElement;
 
 import java.time.Duration;
 
-import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$x;
 
 public class CardWidget {
-    String wrongFormatErrText = "Неверный формат";
-    String requiredFieldErrText = "Поле обязательно для заполнения";
-    String expiredCardErrText = "Истёк срок действия карты";
-    String wrongExpirationDateText = "Неверно указан срок действия карты";
+
     SelenideElement cardNumberInput = $x("//input[@placeholder='0000 0000 0000 0000']");
     SelenideElement creditHeader = $x("//h3[contains(text(), 'Кредит по данным')]");
     SelenideElement cashHeader = $x("//h3[contains(text(), 'Оплата по карте')]");
@@ -26,41 +22,34 @@ public class CardWidget {
 
     SelenideElement failNotification = $x("//div[contains(@class, 'notification__title') and contains(text(), 'Ошибка')]");
     SelenideElement sendingRequest = $x("//button[contains(text(), 'Отправляем запрос в Банк...')]");
-//    SelenideElement failedNotification = $("div.notification__content").shouldHave(text("Ошибка! Банк отказал в проведении операции."));
 
     SelenideElement wrongFormatMsg = $x("//span[contains(text(), 'Неверный формат')]");
     SelenideElement invalidExpireDateMsg = $x("//span[contains(text(), 'Неверно указан срок действия карты')]");
 
     SelenideElement cardExpiredMsg = $x("//span[contains(text(), 'Истёк срок действия карты')]");
     SelenideElement fieldMustBeFilledMsg = $x("//span[contains(text(), 'Поле обязательно для заполнения')]");
-    //Поле обязательно для заполнения
-//Истёк срок действия карты
-//Неверно указан срок действия карты
-//xpath("//button[contains(text(), 'Отправляем запрос в Банк...')]");
 
-//$("div.notification__content").shouldHave(text("Ошибка! Банк отказал в проведении операции."));
-// Неверно указан срок действия карты
-//
-    public void checkWrongFormatErrorPresent(){
+    public void checkWrongFormatErrorPresent() {
         wrongFormatMsg.shouldBe(visible);
     }
 
-    public void checkFieldMustBeFilledErrorPresent(){
+    public void checkFieldMustBeFilledErrorPresent() {
         fieldMustBeFilledMsg.shouldBe(visible);
     }
-    public void checkInvalidExpireDateErrorPresent(){
+
+    public void checkInvalidExpireDateErrorPresent() {
         invalidExpireDateMsg.shouldBe(visible);
     }
-    public void checkCardExpiredErrorPresent(){
+
+    public void checkCardExpiredErrorPresent() {
         cardExpiredMsg.shouldBe(visible);
     }
+
     public void checkIfBuyWithCardHeaderVisible() {
-//        convert to boolean
         cashHeader.shouldBe(visible);
     }
 
     public void checkIfBuyWithCreditHeaderVisible() {
-//        convert to boolean
         creditHeader.shouldBe(visible);
     }
 
