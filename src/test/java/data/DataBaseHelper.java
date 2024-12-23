@@ -10,8 +10,8 @@ import java.sql.DriverManager;
 
 public class DataBaseHelper {
 
-    //    private static final String URL = "jdbc:mysql://localhost:3306/app";
-    private static final String URL = "jdbc:postgresql://localhost:5432/app";
+        private static final String URL = "jdbc:mysql://localhost:3306/app";
+//    private static final String URL = "jdbc:postgresql://localhost:5432/app";
     private static final String USER = "app";
     private static final String PASSWORD = "pass";
     private static final QueryRunner runner = new QueryRunner();
