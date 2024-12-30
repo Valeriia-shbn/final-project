@@ -3,6 +3,7 @@ package data;
 import lombok.SneakyThrows;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
+import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -10,8 +11,6 @@ import java.sql.DriverManager;
 
 public class DataBaseHelper {
 
-        private static final String URL = "jdbc:mysql://localhost:3306/app";
-//    private static final String URL = "jdbc:postgresql://localhost:5432/app";
     private static final String USER = "app";
     private static final String PASSWORD = "pass";
     private static final QueryRunner runner = new QueryRunner();
@@ -19,7 +18,7 @@ public class DataBaseHelper {
 
     @SneakyThrows
     private static Connection getConnection() {
-        return DriverManager.getConnection(URL, USER, PASSWORD);
+        return DriverManager.getConnection(System.getProperty("db.url"), USER, PASSWORD);
     }
 
     @SneakyThrows
@@ -55,27 +54,13 @@ public class DataBaseHelper {
     @SneakyThrows
     public static int getOrderCountByPaymentId(String paymentId) {
         String sql = "SELECT COUNT(*) FROM order_entity WHERE payment_id = ?";
-        try (var connection = getConnection()) {
-            return runner.query(connection, sql, rs -> {
-                if (rs.next()) {
-                    return rs.getInt(1);
-                }
-                return 0;
-            }, paymentId);
-        }
+        return runner.query(sql, new ScalarHandler<>(), paymentId);
     }
 
     @SneakyThrows
-    public static int getOrderCountByCreditId(String bankId) {
+    public static int getOrderCountByCreditId(String creditId) {
         String sql = "SELECT COUNT(*) FROM order_entity WHERE credit_id = ?";
-        try (var connection = getConnection()) {
-            return runner.query(connection, sql, rs -> {
-                if (rs.next()) {
-                    return rs.getInt(1);
-                }
-                return 0;
-            }, bankId);
-        }
+        return runner.query(sql, new ScalarHandler<>(), creditId);
     }
 
 }

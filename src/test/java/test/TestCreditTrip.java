@@ -11,10 +11,9 @@ import page.MainPage;
 import static com.codeborne.selenide.Selenide.open;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class TestBuyTrip {
+public class TestCreditTrip {
     DataHelper dataHelper = new DataHelper();
-    private TransactionRecordPayment transactionRecordPayment;
-
+    private TransactionRecordCredit transactionRecordCredit;
 
     @BeforeEach
     void setup() {
@@ -22,16 +21,16 @@ public class TestBuyTrip {
     }
 
     @Test
-    void shouldSuccessfulBuyWhenProvideCorrectData() {
+    void shouldSuccessfulCreditWhenProvideCorrectData() {
         String month = DataHelper.generateRandomMonth();
-        String year = DataHelper.getFutureYearInYY(2);
-        MainPage mainPage = new MainPage();
-        mainPage.selectBuyOption();
+        String year = DataHelper.getFutureYearInYY(1);
 
+        MainPage mainPage = new MainPage();
+        mainPage.selectCreditOption();
 
         CardWidget cardWidget = new CardWidget();
 
-        cardWidget.checkIfBuyWithCardHeaderVisible();
+        cardWidget.checkIfBuyWithCreditHeaderVisible();
 
         cardWidget.enterCardNumber(dataHelper.getApprovedCardNumber());
 
@@ -47,26 +46,26 @@ public class TestBuyTrip {
 
         cardWidget.checkSuccessfulNotification();
 
+        transactionRecordCredit = DataBaseHelper.getLastTransactionCredit();
+        assertEquals(dataHelper.getApproved(), transactionRecordCredit.getStatus());
 
-        // check that record in db in payment table
-        transactionRecordPayment = DataBaseHelper.getLastTransactionPayment();
-        assertEquals(dataHelper.getApproved(), transactionRecordPayment.getStatus());
-
-        int actualNumberOfOrders = DataBaseHelper.getOrderCountByPaymentId(transactionRecordPayment.getTransaction_id());
+        int actualNumberOfOrders = DataBaseHelper.getOrderCountByCreditId(transactionRecordCredit.getBankId());
         assertEquals(1, actualNumberOfOrders);
 
     }
 
     @Test
-    void shouldFailBuyWhenProvideDeclinedCard() {
+    void shouldFailCreditWhenProvideDeclinedCard() {
         String month = DataHelper.generateRandomMonth();
-        String year = DataHelper.getFutureYearInYY(2);
+        String year = DataHelper.getFutureYearInYY(1);
+
         MainPage mainPage = new MainPage();
-        mainPage.selectBuyOption();
+        mainPage.selectCreditOption();
 
         CardWidget cardWidget = new CardWidget();
 
-        cardWidget.checkIfBuyWithCardHeaderVisible();
+        cardWidget.checkIfBuyWithCreditHeaderVisible();
+
 
         cardWidget.enterCardNumber(dataHelper.getDeclinedCardNumber());
 
@@ -82,25 +81,23 @@ public class TestBuyTrip {
 
         cardWidget.checkFailNotification();
 
-        // check that record in db in payment table
-        transactionRecordPayment = DataBaseHelper.getLastTransactionPayment();
-        assertEquals(dataHelper.getDeclined(), transactionRecordPayment.getStatus());
+        transactionRecordCredit = DataBaseHelper.getLastTransactionCredit();
+        assertEquals(dataHelper.getDeclined(), transactionRecordCredit.getStatus());
 
-        int actualNumberOfOrders = DataBaseHelper.getOrderCountByPaymentId(transactionRecordPayment.getTransaction_id());
+        int actualNumberOfOrders = DataBaseHelper.getOrderCountByCreditId(transactionRecordCredit.getBankId());
         assertEquals(0, actualNumberOfOrders);
-
     }
 
     @Test
-    void shouldDeclineBuyWhenInvalidCardProvided() {
+    void shouldDeclineCreditWhenInvalidCardProvided() {
         String month = DataHelper.generateRandomMonth();
         String year = DataHelper.getFutureYearInYY(2);
         MainPage mainPage = new MainPage();
-        mainPage.selectBuyOption();
+        mainPage.selectCreditOption();
 
         CardWidget cardWidget = new CardWidget();
 
-        cardWidget.checkIfBuyWithCardHeaderVisible();
+        cardWidget.checkIfBuyWithCreditHeaderVisible();
 
         cardWidget.enterCardNumber(dataHelper.getInvalidCard());
 
@@ -115,13 +112,12 @@ public class TestBuyTrip {
         cardWidget.clickContinueButton();
 
         cardWidget.checkFailNotification();
-        
 
         // check that record in db in payment table
-        transactionRecordPayment = DataBaseHelper.getLastTransactionPayment();
-        assertEquals(dataHelper.getDeclined(), transactionRecordPayment.getStatus());
+        transactionRecordCredit = DataBaseHelper.getLastTransactionCredit();
+        assertEquals(dataHelper.getDeclined(), transactionRecordCredit.getStatus());
 
-        int actualNumberOfOrders = DataBaseHelper.getOrderCountByPaymentId(transactionRecordPayment.getTransaction_id());
+        int actualNumberOfOrders = DataBaseHelper.getOrderCountByCreditId(transactionRecordCredit.getBankId());
         assertEquals(0, actualNumberOfOrders);
     }
 
@@ -130,10 +126,10 @@ public class TestBuyTrip {
     void shouldRaiseErrorWhenWrongFormatMonthProvided(String month) {
         String year = DataHelper.getFutureYearInYY(2);
         MainPage mainPage = new MainPage();
-        mainPage.selectBuyOption();
+        mainPage.selectCreditOption();
         CardWidget cardWidget = new CardWidget();
-        cardWidget.checkIfBuyWithCardHeaderVisible();
-        
+        cardWidget.checkIfBuyWithCreditHeaderVisible();
+
         cardWidget.enterCardNumber(dataHelper.getApprovedCardNumber());
 
         cardWidget.enterMonth(month);
@@ -156,10 +152,10 @@ public class TestBuyTrip {
         String year = DataHelper.getFutureYearInYY(2);
         String month = DataHelper.generateRandomMonth();
         MainPage mainPage = new MainPage();
-        mainPage.selectBuyOption();
+        mainPage.selectCreditOption();
         CardWidget cardWidget = new CardWidget();
-        cardWidget.checkIfBuyWithCardHeaderVisible();
-        
+        cardWidget.checkIfBuyWithCreditHeaderVisible();
+
         cardWidget.enterCardNumber(dataHelper.getApprovedCardNumber());
 
         cardWidget.enterMonth(month);
@@ -177,14 +173,39 @@ public class TestBuyTrip {
     }
 
     @Test
+    void shouldRaiseErrorWhenEmptyOwnerNameProvided() {
+        String year = DataHelper.getFutureYearInYY(2);
+        String month = DataHelper.generateRandomMonth();
+        MainPage mainPage = new MainPage();
+        mainPage.selectCreditOption();
+        CardWidget cardWidget = new CardWidget();
+        cardWidget.checkIfBuyWithCreditHeaderVisible();
+
+        cardWidget.enterCardNumber(dataHelper.getApprovedCardNumber());
+
+        cardWidget.enterMonth(month);
+
+        cardWidget.enterYear(year);
+
+        cardWidget.enterCardOwnerName("");
+
+        cardWidget.enterCvc(dataHelper.getCorrectCvcFormat());
+
+        cardWidget.clickContinueButton();
+
+        cardWidget.checkFieldMustBeFilledErrorPresent();
+
+    }
+
+    @Test
     void shouldRaiseErrorWhenNonValidMonthProvided() {
         String year = DataHelper.getFutureYearInYY(2);
         String monthInvalid = "13";
         MainPage mainPage = new MainPage();
-        mainPage.selectBuyOption();
+        mainPage.selectCreditOption();
         CardWidget cardWidget = new CardWidget();
-        cardWidget.checkIfBuyWithCardHeaderVisible();
-        
+        cardWidget.checkIfBuyWithCreditHeaderVisible();
+
         cardWidget.enterCardNumber(dataHelper.getApprovedCardNumber());
 
         cardWidget.enterMonth(monthInvalid);
@@ -207,10 +228,10 @@ public class TestBuyTrip {
         String year = DataHelper.getFutureYearInYY(2);
         String month = DataHelper.generateRandomMonth();
         MainPage mainPage = new MainPage();
-        mainPage.selectBuyOption();
+        mainPage.selectCreditOption();
         CardWidget cardWidget = new CardWidget();
-        cardWidget.checkIfBuyWithCardHeaderVisible();
-        
+        cardWidget.checkIfBuyWithCreditHeaderVisible();
+
         cardWidget.enterCardNumber(dataHelper.getApprovedCardNumber());
 
         cardWidget.enterMonth(month);
@@ -232,10 +253,10 @@ public class TestBuyTrip {
         String year = DataHelper.getPrevYearInYY(2);
         String month = DataHelper.generateRandomMonth();
         MainPage mainPage = new MainPage();
-        mainPage.selectBuyOption();
+        mainPage.selectCreditOption();
         CardWidget cardWidget = new CardWidget();
-        cardWidget.checkIfBuyWithCardHeaderVisible();
-        
+        cardWidget.checkIfBuyWithCreditHeaderVisible();
+
         cardWidget.enterCardNumber(dataHelper.getApprovedCardNumber());
 
         cardWidget.enterMonth(month);
@@ -257,10 +278,10 @@ public class TestBuyTrip {
         String year = DataHelper.getFutureYearInYY(0);
         String month = DataHelper.getCurrentMonth();
         MainPage mainPage = new MainPage();
-        mainPage.selectBuyOption();
+        mainPage.selectCreditOption();
         CardWidget cardWidget = new CardWidget();
-        cardWidget.checkIfBuyWithCardHeaderVisible();
-        
+        cardWidget.checkIfBuyWithCreditHeaderVisible();
+
         cardWidget.enterCardNumber(dataHelper.getApprovedCardNumber());
 
         cardWidget.enterMonth(month);
@@ -276,5 +297,4 @@ public class TestBuyTrip {
         cardWidget.checkSuccessfulNotification();
 
     }
-
 }

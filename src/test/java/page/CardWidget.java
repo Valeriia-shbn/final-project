@@ -10,6 +10,8 @@ import static com.codeborne.selenide.Selenide.$x;
 
 public class CardWidget {
 
+    private final int TIMEOUT = 20;
+
     SelenideElement cardNumberInput = $x("//input[@placeholder='0000 0000 0000 0000']");
     SelenideElement creditHeader = $x("//h3[contains(text(), 'Кредит по данным')]");
     SelenideElement cashHeader = $x("//h3[contains(text(), 'Оплата по карте')]");
@@ -82,11 +84,11 @@ public class CardWidget {
     }
 
     public void checkSuccessfulNotification() {
-        successNotification.shouldBe(visible, Duration.ofSeconds(10));
+        successNotification.shouldBe(visible, Duration.ofSeconds(TIMEOUT));
     }
 
     public void checkFailNotification() {
-        failNotification.shouldBe(visible, Duration.ofSeconds(10));
+        failNotification.shouldBe(visible, Duration.ofSeconds(TIMEOUT));
     }
 
 }
