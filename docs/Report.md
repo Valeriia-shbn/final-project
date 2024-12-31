@@ -161,3 +161,4 @@
 ## Итоги:
 - **Passed:** 21
 - **Failed:** 4  
+![Allure-Report-final-project](https://github.com/user-attachments/assets/57953cfc-2039-44d9-8f0e-b7b2901d8e8f)
