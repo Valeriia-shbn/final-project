@@ -27,27 +27,29 @@
 ---
 
 ## 4. Запуск приложения
-- Перейдите в директорию `final-project/artifacts`.
-- Запустите приложение командой c dbUrl jdbc:mysql://localhost:3306/app для MySQL и jdbc:postgresql://localhost:5432/app для Postgresql:
-- java -jar .\aqa-shop.jar -Dspring.datasource.url={dbUrl}
+- Запустите приложение командой для использования MySQL:
 - ```bash
-  java -jar .\aqa-shop.jar -Dspring.datasource.url=jdbc:mysql://localhost:3306/app
+  java "-Dspring.datasource.url=jdbc:mysql://localhost:3306/app" -jar artifacts/aqa-shop.jar
 
   ```
+- или командой для использования Postgresql
+- ```bash
+  java "-Dspring.datasource.url=jdbc:postgresql://localhost:5432/app" -jar artifacts/aqa-shop.jar
 
-  
-- для смены БД необходимо остановить приложения с помощью команды ctrl+c и перезапустить с необходимой dbUrl.
+  ```
+- для смены БД необходимо остановить приложения с помощью команды ctrl+c и перезапустить с необходимой Dspring.datasource.url.
 
 ---
 
 ## 5. Запуск тестов
-- Выполните команду для очистки и запуска тестов с выбранной БД:
+- Выполните команду для очистки и запуска тестов с MySQL:
   ```bash
-  ./gradlew test -D db.url=jdbc:mysql://localhost:3306/app
+  ./gradlew "-Ddb.url=jdbc:mysql://localhost:3306/app" clean test
   ```
-
-[//]: # (  ./gradlew test -D db.url=jdbc:mysql://localhost:3306/app)
-
+    -  Либо выполните команду для очистки и запуска тестов с Postgresql:
+  ```bash
+  ./gradlew "-Ddb.url=jdbc:postgresql://localhost:5432/app" clean test
+  ```
 ---
 
 ## 6. Генерация и просмотр отчета Allure
@@ -59,7 +61,6 @@
    ```bash
    ./gradlew allureServe
    ```
-
 ---
 
 

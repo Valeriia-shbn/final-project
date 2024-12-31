@@ -58,8 +58,6 @@ public class CardWidget {
 
     public void enterCardNumber(String cardNumber) {
         cardNumberInput.shouldBe(visible);
-        cardNumberInput.click();
-        System.out.println("enter card number " + cardNumber);
         cardNumberInput.setValue(cardNumber);
     }
 

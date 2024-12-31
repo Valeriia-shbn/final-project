@@ -2,83 +2,162 @@
 
 ## Пройденные тесты
 
-1. **Название теста**: shouldRaiseErrorWhenWrongFormatCvcProvided  
-   **Перевод**: Должна возникнуть ошибка при вводе CVC в неправильном формате  
-   **Результат**: passed  
-   **Время выполнения**: 2498 ms
+# Результаты тестов
 
-2. **Название теста**: shouldRaiseErrorWhenWrongFormatCvcProvided (String) [3] 22  
-   **Перевод**: Должна возникнуть ошибка при вводе CVC в неправильном формате (строка) [3] 22  
-   **Результат**: passed  
-   **Время выполнения**: 2328 ms
+## Тесты:
 
-3. **Название теста**: shouldRaiseErrorWhenWrongFormatMonthProvided  
-   **Перевод**: Должна возникнуть ошибка при вводе месяца в неправильном формате  
-   **Результат**: passed  
-   **Время выполнения**: 8549 ms
+### 1.
+**Test Class:** `test.TestBuyTrip`  
+**Test Method:** `shouldRaiseErrorWhenWrongFormatCvcProvided(String) [3] 22`  
+**Описание:** Должен выдать ошибку при неправильном формате CVC. Форма: Оплата по карте  
+**Status:** passed
 
-4. **Название теста**: shouldRaiseErrorWhenWrongFormatMonthProvided (String) [1] 5  
-   **Перевод**: Должна возникнуть ошибка при вводе месяца в неправильном формате (строка) [1] 5  
-   **Результат**: passed  
-   **Время выполнения**: 2476 ms
+### 2.
+**Test Class:** `test.TestCreditTrip`  
+**Test Method:** `shouldRaiseErrorWhenWrongFormatCvcProvided(String) [1]`  
+**Описание:** Должен выдать ошибку при неправильном формате CVC. Форма: Кредит по данным карты  
+**Status:** passed
 
-5. **Название теста**: shouldRaiseErrorWhenWrongFormatCvcProvided (String) [2] 1  
-   **Перевод**: Должна возникнуть ошибка при вводе CVC в неправильном формате (строка) [2] 1  
-   **Результат**: passed  
-   **Время выполнения**: 2430 ms
+### 3.
+**Test Class:** `test.TestBuyTrip`  
+**Test Method:** `shouldRaiseErrorWhenNonValidMonthProvided`  
+**Описание:** Должен выдать ошибку при недопустимом месяце. Форма: Оплата по карте  
+**Status:** passed
 
-6. **Название теста**: shouldRaiseErrorWhenNonValidMonthProvided  
-   **Перевод**: Должна возникнуть ошибка при вводе невалидного месяца  
-   **Результат**: passed  
-   **Время выполнения**: 2435 ms
+### 4.
+**Test Class:** `test.TestCreditTrip`  
+**Test Method:** `shouldRaiseErrorWhenWrongFormatCvcProvided(String) [2] 1`  
+**Описание:** Должен выдать ошибку при неправильном формате CVC. Форма: Кредит по данным карты  
+**Status:** passed
 
-7. **Название теста**: shouldSuccessfulBuyWhenProvideCorrectData  
-   **Перевод**: Покупка должна быть успешной при вводе корректных данных  
-   **Результат**: passed  
-   **Время выполнения**: 8340 ms
+### 5.
+**Test Class:** `test.TestBuyTrip`  
+**Test Method:** `shouldRaiseErrorWhenWrongFormatCvcProvided(String) [1]`  
+**Описание:** Должен выдать ошибку при неправильном формате CVC. Форма: Оплата по карте  
+**Status:** passed
 
-8. **Название теста**: shouldRaiseErrorWhenExpiredCardProvided  
-   **Перевод**: Должна возникнуть ошибка при использовании карты с истекшим сроком действия  
-   **Результат**: passed  
-   **Время выполнения**: 2551 ms
+### 6.
+**Test Class:** `test.TestBuyTrip`  
+**Test Method:** `shouldRaiseErrorWhenWrongFormatMonthProvided(String) [1] 5`  
+**Описание:** Должен выдать ошибку при неправильном формате месяца. Форма: Оплата по карте  
+**Status:** passed
 
-9. **Название теста**: shouldRaiseErrorWhenWrongFormatMonthProvided (String) [2]  
-   **Перевод**: Должна возникнуть ошибка при вводе месяца в неправильном формате (строка) [2]  
-   **Результат**: passed  
-   **Время выполнения**: 2432 ms
+### 7.
+**Test Class:** `test.TestCreditTrip`  
+**Test Method:** `shouldDeclineCreditWhenInvalidCardProvided`  
+**Описание:** Должен отклонить кредит при недействительной карте. Форма: Кредит по данным карты  
+**Status:** passed
 
-10. **Название теста**: shouldRaiseErrorWhenEmptyNameProvided  
-    **Перевод**: Должна возникнуть ошибка при вводе пустого имени  
-    **Результат**: passed  
-    **Время выполнения**: 2448 ms
+### 8.
+**Test Class:** `test.TestCreditTrip`  
+**Test Method:** `shouldRaiseErrorWhenNonValidMonthProvided`  
+**Описание:** Должен выдать ошибку при недопустимом месяце. Форма: Кредит по данным карты  
+**Status:** passed
 
-11. **Название теста**: shouldSucceedWhenValidCardWithExpireDateThisMonthProvided  
-    **Перевод**: Покупка должна быть успешной при использовании валидной карты с истекающим сроком действия в этом месяце  
-    **Результат**: passed  
-    **Время выполнения**: 4032 ms
+### 9.
+**Test Class:** `test.TestBuyTrip`  
+**Test Method:** `shouldSuccessfulBuyWhenProvideCorrectData`  
+**Описание:** Должна пройти успешная покупка при правильных данных. Форма: Оплата по карте  
+**Status:** passed
 
-## Неудачные тесты
+### 10.
+**Test Class:** `test.TestBuyTrip`  
+**Test Method:** `shouldRaiseErrorWhenExpiredCardProvided`  
+**Описание:** Должен выдать ошибку при истекшей карте. Форма: Оплата по карте  
+**Status:** passed
 
-1. **Название теста**: shouldDeclineWhenInvalidCardProvided  
-   **Перевод**: Операция должна быть отклонена при использовании невалидной карты  
-   **Результат**: failed  
-   **Время выполнения**: 13392 ms  
-   **Issue**: Статус 'APPROVED' записывается при неудачной оплате
+### 11.
+**Test Class:** `test.TestBuyTrip`  
+**Test Method:** `shouldRaiseErrorWhenWrongFormatMonthProvided(String) [2]`  
+**Описание:** Должен выдать ошибку при неправильном формате месяца. Форма: Оплата по карте  
+**Status:** passed
 
-2. **Название теста**: shouldFailCreditWhenProvideDeclinedCard  
-   **Перевод**: Кредитная операция должна завершиться неудачей при использовании отклоненной карты  
-   **Результат**: failed  
-   **Время выполнения**: 21802 ms  
-   **Issue**: Сообщение об успешной операции при отклоненной карте покупка в кредит
+### 12.
+**Test Class:** `test.TestBuyTrip`  
+**Test Method:** `shouldRaiseErrorWhenEmptyNameProvided`  
+**Описание:** Должен выдать ошибку при пустом имени. Форма: Оплата по карте  
+**Status:** passed
 
-3. **Название теста**: shouldSuccessfulCreditWhenProvideCorrectData  
-   **Перевод**: Кредитная операция должна быть успешной при вводе корректных данных  
-   **Результат**: failed  
-   **Время выполнения**: 6119 ms  
-   **Issue**: Ошибка записи credit_id в таблицу order_entity при успешном запросе кредита
+### 13.
+**Test Class:** `test.TestCreditTrip`  
+**Test Method:** `shouldSucceedWhenValidCardWithExpireDateThisMonthProvided`  
+**Описание:** Должен пройти успешно при карте с датой истечения в этом месяце. Форма: Кредит по данным карты  
+**Status:** passed
 
-4. **Название теста**: shouldFailBuyWhenProvideDeclinedCard  
-   **Перевод**: Покупка должна завершиться неудачей при использовании отклоненной карты  
-   **Результат**: failed  
-   **Время выполнения**: 11944 ms  
-   **Issue**: Сообщение об успешной операции при отклоненной карте покупка
+### 14.
+**Test Class:** `test.TestCreditTrip`  
+**Test Method:** `shouldFailCreditWhenProvideDeclinedCard`  
+**Описание:** Должен провалить кредит при отклонённой карте. Форма: Кредит по данным карты  
+**Status:** failed
+
+### 15.
+**Test Class:** `test.TestCreditTrip`  
+**Test Method:** `shouldRaiseErrorWhenWrongFormatCvcProvided(String) [3] 22`  
+**Описание:** Должен выдать ошибку при неправильном формате CVC. Форма: Кредит по данным карты  
+**Status:** passed
+
+### 16.
+**Test Class:** `test.TestCreditTrip`  
+**Test Method:** `shouldRaiseErrorWhenExpiredCardProvided`  
+**Описание:** Должен выдать ошибку при истекшей карте. Форма: Кредит по данным карты  
+**Status:** passed
+
+### 17.
+**Test Class:** `test.TestBuyTrip`  
+**Test Method:** `shouldDeclineBuyWhenInvalidCardProvided`  
+**Описание:** Должен отклонить покупку при недействительной карте. Форма: Оплата по карте  
+**Status:** failed
+
+### 18.
+**Test Class:** `test.TestCreditTrip`  
+**Test Method:** `shouldRaiseErrorWhenEmptyNameProvided`  
+**Описание:** Должен выдать ошибку при пустом имени. Форма: Кредит по данным карты  
+**Status:** passed
+
+### 19.
+**Test Class:** `test.TestCreditTrip`  
+**Test Method:** `shouldRaiseErrorWhenWrongFormatMonthProvided(String) [2]`  
+**Описание:** Должен выдать ошибку при неправильном формате месяца. Форма: Кредит по данным карты  
+**Status:** passed
+
+### 20.
+**Test Class:** `test.TestBuyTrip`  
+**Test Method:** `shouldRaiseErrorWhenWrongFormatCvcProvided(String) [2] 1`  
+**Описание:** Должен выдать ошибку при неправильном формате CVC. Форма: Оплата по карте  
+**Status:** passed
+
+### 21.
+**Test Class:** `test.TestCreditTrip`  
+**Test Method:** `shouldRaiseErrorWhenEmptyOwnerNameProvided`  
+**Описание:** Должен выдать ошибку при пустом имени владельца. Форма: Кредит по данным карты  
+**Status:** passed
+
+### 22.
+**Test Class:** `test.TestCreditTrip`  
+**Test Method:** `shouldRaiseErrorWhenWrongFormatMonthProvided(String) [1] 5`  
+**Описание:** Должен выдать ошибку при неправильном формате месяца. Форма: Кредит по данным карты  
+**Status:** passed
+
+### 23.
+**Test Class:** `test.TestCreditTrip`  
+**Test Method:** `shouldSuccessfulCreditWhenProvideCorrectData`  
+**Описание:** Должен пройти успешный кредит при правильных данных. Форма: Кредит по данным карты  
+**Status:** failed
+
+### 24.
+**Test Class:** `test.TestBuyTrip`  
+**Test Method:** `shouldSucceedWhenValidCardWithExpireDateThisMonthProvided`  
+**Описание:** Должен пройти успешно при карте с датой истечения в этом месяце. Форма: Оплата по карте  
+**Status:** passed
+
+### 25.
+**Test Class:** `test.TestBuyTrip`  
+**Test Method:** `shouldFailBuyWhenProvideDeclinedCard`  
+**Описание:** Должен провалить покупку при отклонённой карте. Форма: Оплата по карте  
+**Status:** failed
+
+---
+
+## Итоги:
+- **Passed:** 21
+- **Failed:** 4  

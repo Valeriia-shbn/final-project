@@ -5,9 +5,9 @@ plugins {
 
 }
 allure {
-    version = '2.20.1' // Use the latest Allure version
+    version = '2.22.0'
     autoconfigure = true
-    aspectjweaver = true
+
 }
 
 
@@ -21,15 +21,14 @@ repositories {
 
 dependencies {
     testImplementation platform('org.junit:junit-bom:5.9.1')
-    testImplementation 'io.rest-assured:rest-assured:4.3.0'
-    testImplementation 'com.google.code.gson:gson:2.8.6'
     testImplementation 'org.junit.jupiter:junit-jupiter:5.6.1'
     testImplementation 'com.codeborne:selenide:6.17.2'
     testImplementation 'mysql:mysql-connector-java:8.0.22'
     testImplementation 'com.github.javafaker:javafaker:1.0.2'
     testImplementation 'commons-dbutils:commons-dbutils:1.7'
     annotationProcessor 'org.projectlombok:lombok:1.18.28'
-    testImplementation 'io.qameta.allure:allure-selenide:2.19.0'
+    testImplementation 'io.qameta.allure:allure-selenide:2.22.0'
+    testImplementation 'io.qameta.allure:allure-junit5:2.22.0'
     implementation 'org.postgresql:postgresql:42.6.0'
     implementation 'org.slf4j:slf4j-simple:2.0.9'
 
@@ -37,10 +36,5 @@ dependencies {
 
 test {
     useJUnitPlatform()
-
-    doFirst {
-        println "db.url = ${System.getProperty('db.url')}"
-    }
-
     systemProperty 'db.url', System.getProperty('db.url')
 }

@@ -54,13 +54,19 @@ public class DataBaseHelper {
     @SneakyThrows
     public static int getOrderCountByPaymentId(String paymentId) {
         String sql = "SELECT COUNT(*) FROM order_entity WHERE payment_id = ?";
-        return runner.query(sql, new ScalarHandler<>(), paymentId);
+        try (var connection = getConnection()) {
+            Long count =  runner.query(connection,sql, new ScalarHandler<>(), paymentId);
+            return count != null ? count.intValue() : 0;
+        }
     }
 
     @SneakyThrows
     public static int getOrderCountByCreditId(String creditId) {
         String sql = "SELECT COUNT(*) FROM order_entity WHERE credit_id = ?";
-        return runner.query(sql, new ScalarHandler<>(), creditId);
+        try (var connection = getConnection()) {
+            Long count =  runner.query(connection, sql, new ScalarHandler<>(), creditId);
+            return count != null ? count.intValue() : 0;
+        }
     }
 
 }

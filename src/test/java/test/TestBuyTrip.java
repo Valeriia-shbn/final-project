@@ -11,7 +11,7 @@ import page.MainPage;
 import static com.codeborne.selenide.Selenide.open;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class TestBuyTrip {
+public class TestBuyTrip extends TestBase {
     DataHelper dataHelper = new DataHelper();
     private TransactionRecordPayment transactionRecordPayment;
 

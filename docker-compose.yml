@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   mysql:
-    image: mysql:8
+    image: mysql:8.0.34
     container_name: mysql_container
     environment:
       MYSQL_ROOT_PASSWORD: root_password
@@ -11,11 +11,9 @@ services:
       MYSQL_PASSWORD: pass
     ports:
       - "3306:3306"
-    volumes:
-      - mysql_data:/var/lib/mysql
 
   postgres:
-    image: postgres:latest
+    image: postgres:14-alpine
     container_name: postgres_container
     environment:
       POSTGRES_DB: app
@@ -23,8 +21,7 @@ services:
       POSTGRES_PASSWORD: pass
     ports:
       - "5432:5432"
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
+
 
   gate-simulator:
     build:
@@ -37,6 +34,3 @@ services:
       - ./gate-simulator:/app
     working_dir: /app
 
-volumes:
-  mysql_data:
-  postgres_data:
